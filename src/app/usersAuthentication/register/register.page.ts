@@ -1,15 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router'
+import { AuthServiceService } from '../services/auth-service.service'
+import { UserData } from '../user-data';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
 })
-export class RegisterPage implements OnInit {
+export class RegisterPage {
 
-  constructor() { }
+  public user: UserData={
+    email: '',
+    password: ''
+  }
 
-  ngOnInit() {
+  constructor(private router: Router, private authService: AuthServiceService) { }
+
+  async onSubmit(){
+    const user = await this.authService.register(this.user);
   }
 
 }

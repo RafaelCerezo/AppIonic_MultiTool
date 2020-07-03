@@ -18,11 +18,13 @@ export class LoginPage  {
   constructor(private router: Router, private authService: AuthServiceService) {}
 
    async onSubmit(){
+     console.log('qqqqq');
     const user = await this.authService.login(this.user);
     if(!user){
       console.log('Error al logear con el usuario');
     }else{
-      //this.router.navigateByUrl('/barra-tabs');
+      console.log('hola');
+      this.router.navigateByUrl('/home');
     }
   }
 

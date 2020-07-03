@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form submit = 'onSubmit()'>
+  <form>
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
       <ion-input [(ngModel)]='user.email' name="emailInput" type="text" required></ion-input>
@@ -21,7 +21,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" color="danger" expand="block">Acceder</ion-button>
+        <ion-button (click)="onSubmit()" type="submit" color="danger" expand="block">Acceder</ion-button>
         <a [routerLink]="['/forgot-password']" class="small-text">Has olvidado la contraseña?</a>
       </ion-col>
     </ion-row>

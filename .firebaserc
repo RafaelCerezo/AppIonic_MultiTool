@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "multitoolapp-db"
+  },
+  "targets": {
+    "multitoolapp-db": {
+      "hosting": {
+        "app": [
+          "multitoolapp-db"
+        ]
+      }
+    }
   }
 }

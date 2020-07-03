@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      MultiTool App
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="auth-form">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button [routerLink]="['./register']" expand="block" color="primary">Registrarse</ion-button>
+
+        <span class="divider line one-line">o</span>
+
+        <span class="already">eres ya un usuario?</span>
+
+        <ion-button [routerLink]="['./login']" expand="block" color="danger">Acceder</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

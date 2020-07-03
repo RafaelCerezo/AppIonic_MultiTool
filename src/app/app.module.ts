@@ -10,11 +10,16 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment.prod'
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker'
+import { IonicStorageModule } from '@ionic/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth'
+
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFirestoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), IonicStorageModule.forRoot(), AngularFireAuthModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -22,4 +27,4 @@ import { ServiceWorkerModule } from '@angular/service-worker'
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

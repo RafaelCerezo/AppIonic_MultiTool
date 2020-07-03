@@ -26,6 +26,7 @@ export class AuthServiceService {
    }
 
    async login(user: UserData){
+     console.log("aaaa");
      try{
       const toast = await this.toastController.create({
         message: 'Aún no ha verificado su cuenta de correo electrónico. Haga click en este mensaje para enviar el email de verificación de nuevo.',

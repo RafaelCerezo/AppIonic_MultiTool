@@ -4,9 +4,14 @@ import { HomePage } from './home.page';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: '',
     component: HomePage,
     children: [
+      {
+        path: '',
+        redirectTo: 'inicio',
+        pathMatch: 'full'
+      },
       {
         path: 'inicio',
         loadChildren: () => import('../inicio/inicio.module').then(m => m.InicioPageModule)
@@ -16,11 +21,6 @@ const routes: Routes = [
         loadChildren: () => import('../eventos/eventos.module').then(m => m.EventosPageModule)
       }
     ]
-  },
-  {
-    path: '',
-    redirectTo: 'home/inicio',
-    pathMatch: 'full'
   }
 ];
 

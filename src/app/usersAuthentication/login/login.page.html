@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Acceder a la aplicación</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form submit = 'onSubmit()'>
+    <ion-item lines="full">
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]='user.email' name="emailInput" type="text" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input [(ngModel)]='user.password' name="passwordInput" type="password" required></ion-input>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" color="danger" expand="block">Acceder</ion-button>
+        <a [routerLink]="['/forgot-password']" class="small-text">Has olvidado la contraseña?</a>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

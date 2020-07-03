@@ -1,5 +1,7 @@
 {
   "name": "MultiTool App",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

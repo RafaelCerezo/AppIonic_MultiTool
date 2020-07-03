@@ -11,12 +11,12 @@
   <form submit = 'onSubmit()'>
     <ion-item lines="full">
       <ion-label position="floating">Email</ion-label>
-      <ion-input [(ngModel)]='user.email' type="text" required></ion-input>
+      <ion-input [(ngModel)]='user.email' name="emailInput" type="text" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Contraseña</ion-label>
-      <ion-input [(ngModel)]='user.password' type="password" required></ion-input>
+      <ion-input [(ngModel)]='user.password' name="passwordInput" type="password" required></ion-input>
     </ion-item>
 
     <ion-row>

@@ -16,7 +16,7 @@ export class AuthServiceService {
   constructor(public afAuth: AngularFireAuth, public toastController: ToastController, private storage: Storage) {
     //Checking if someone is already logged in
     this.afAuth.authState.subscribe(result=> this.isLogged = result );
-    this.afAuth.auth.onAuthStateChanged(user =>{
+    this.afAuth.onAuthStateChanged(user =>{
       if(user){
         this.userUid = user.uid;
       }else{
@@ -35,7 +35,7 @@ export class AuthServiceService {
         this.sendVerificationEmail();
         toast.dismiss();
       }
-      const userLogged = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      const userLogged = await this.afAuth.signInWithEmailAndPassword(user.email, user.password);
       if(userLogged.user.emailVerified){
         this.saveDataStorage(user.email, user.password);
         toast.dismiss();
@@ -52,7 +52,7 @@ export class AuthServiceService {
 
    async register(user: UserData){
     try{
-      return await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password).then(()=>{
+      return await this.afAuth.createUserWithEmailAndPassword(user.email, user.password).then(()=>{
         this.sendVerificationEmail();
       });
     }catch(error){
@@ -61,7 +61,7 @@ export class AuthServiceService {
    }
 
    async sendVerificationEmail(){
-    (await this.afAuth.auth.currentUser).sendEmailVerification();
+    (await this.afAuth.currentUser).sendEmailVerification();
     const toast = await this.toastController.create({
       message: 'Se ha enviado un email de verificación.',
       color: 'success',

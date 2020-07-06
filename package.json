@@ -30,6 +30,7 @@
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-sqlite-storage": "^5.0.0",
     "firebase": "^7.15.5",
+    "ionic2-calendar": "^0.6.5",
     "rxjs": "~6.6.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

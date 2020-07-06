@@ -1,9 +1,26 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Eventos</ion-title>
-  </ion-toolbar>
+  <ion-navbar color="primary">
+      <ion-title>{{viewTitle}}</ion-title>
+      <ion-buttons end>
+          <button ion-button [disabled]="isToday" (click)="today()">Hoy</button>
+          <button ion-button (click)="changeMode('month')">Mes</button>
+          <button ion-button (click)="changeMode('week')">Semana</button>
+          <button ion-button (click)="changeMode('day')">Día</button>
+          <button ion-button (click)="loadEvents()">Ver Eventos</button>
+      </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content class="has-header">
+  <calendar [locale]="calendar.locale"
+            [eventSource]="eventSource"
+            [calendarMode]="calendar.mode"
+            [currentDate]="calendar.currentDate"
+            [step]="30"
+            [startingDayWeek]="1"
+            (onCurrentDateChanged)="onCurrentDateChanged($event)"
+            (onEventSelected)="onEventSelected($event)"
+            (onTitleChanged)="onViewTitleChanged($event)"
+            (onTimeSelected)="onTimeSelected($event)">
+  </calendar>
 </ion-content>

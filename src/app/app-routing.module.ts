@@ -12,10 +12,9 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'login-register',
+    redirectTo: 'home',
     pathMatch: 'full'
-  },
-
+  }
 ];
 
 @NgModule({

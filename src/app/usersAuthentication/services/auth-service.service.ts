@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth'
-import { ToastController } from '@ionic/angular';
 import { UserData } from '../user-data';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router'
+import { CommonServiceService } from '../../commons/common-service.service'
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class AuthServiceService {
   public isLogged: any = false;
   public userUid: string;
 
-  constructor(public afAuth: AngularFireAuth, public toastController: ToastController, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, private router: Router, private commonService: CommonServiceService) {
     //Checking if someone is already logged in
     this.afAuth.authState.subscribe(result=> this.isLogged = result );
     this.afAuth.onAuthStateChanged(user =>{
@@ -31,14 +31,10 @@ export class AuthServiceService {
 
    async login(user: UserData, rememberMe: boolean){
      try{
-      const toast = await this.toastController.create({
-        message: 'Aún no ha verificado su cuenta de correo electrónico. Haga click en este mensaje para enviar el email de verificación de nuevo.',
-        color: 'warning'
-      });
-      toast.onclick = () => {
-        this.sendVerificationEmail();
-        toast.dismiss();
-      }
+      const toast = await this.commonService.createToast(
+      'Aún no ha verificado su cuenta de correo electrónico. Haga click en este mensaje para enviar el email de verificación de nuevo.',
+      'warning'
+      );
       const userLogged = await this.afAuth.signInWithEmailAndPassword(user.email, user.password);
       if(userLogged.user.emailVerified){
         if(rememberMe){
@@ -60,6 +56,22 @@ export class AuthServiceService {
      }
    }
 
+   async logout(){
+     try{
+      firebase.firestore().clearPersistence();
+      this.afAuth.signOut();
+     }catch(err){
+      console.log(err);
+      const toast = await this.commonService.createToast(
+       'Ha ocurrido un error al cerrar sesión. Puede reintentarlo haciendo click en este mensaje o puede ponerse en contacto con los administradores.',
+       'danger',
+       2000,
+       this.logout()
+      );
+      toast.present();
+     }
+   }
+
    async register(user: UserData){
     try{
       return await this.afAuth.createUserWithEmailAndPassword(user.email, user.password).then(()=>{
@@ -72,11 +84,10 @@ export class AuthServiceService {
 
    async sendVerificationEmail(){
     (await this.afAuth.currentUser).sendEmailVerification();
-    const toast = await this.toastController.create({
-      message: 'Se ha enviado un email de verificación.',
-      color: 'success',
-      duration: 2000
-    });
+    const toast = await this.commonService.createToast(
+      'Se ha enviado un email de verificación.',
+      'success'
+    );
     toast.present();
    }
 
@@ -96,12 +107,12 @@ export class AuthServiceService {
       color= 'danger';
       resultado = false;
     }
-    const toast = await this.toastController.create({
-      message: message,
-      color: color,
-      duration: 2000
-    });
-    await toast.present();
+    const toast = await this.commonService.createToast(
+      message,
+      color,
+      2000
+    );
+    toast.present();
     return resultado;
   }
 }

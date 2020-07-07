@@ -19,7 +19,8 @@ const routes: Routes = [
       {
         path: 'eventos',
         loadChildren: () => import('../eventos/eventos.module').then(m => m.EventosPageModule)
-      }
+      },
+      
     ]
   }
 ];

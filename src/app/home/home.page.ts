@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthServiceService } from '../usersAuthentication/services/auth-service.service'
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +9,19 @@ import { AuthServiceService } from '../usersAuthentication/services/auth-service
 })
 export class HomePage {
 
-  constructor(private auth: AuthServiceService) {}
+  constructor(private auth: AuthServiceService, private menu: MenuController) {}
+
+  openMenu(){
+    this.menu.open('menuOptions');
+  }
+
+  
+  async logOut(){
+    this.auth.logout();
+  }
+
+  async openNavigator(){
+    
+  }
 
 }

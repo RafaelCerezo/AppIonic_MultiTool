@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { registerLocaleData } from '@angular/common';
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs);
 
 @Component({
   selector: 'app-eventos',
@@ -7,14 +10,13 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./eventos.page.scss'],
 })
 export class EventosPage {
-
     eventSource;
     viewTitle;
 
     isToday:boolean;
     calendar = {
         mode: 'month',
-        locale: 'en-GB',
+        locale: localeEs[0],
         currentDate: new Date(),
         dateFormatter: {
             formatMonthViewDay: function(date:Date) {
@@ -49,8 +51,8 @@ export class EventosPage {
     }
 
     loadEvents() {
-        this.eventSource = this.createRandomEvents();
-        // this.eventSource = this.createStaticAllDayEvents();
+        //this.eventSource = this.createRandomEvents();
+        //this.eventSource = this.createStaticAllDayEvents();
         //  let eventSource = this.createStaticNormalDayEvents();
         //  let eventSource1 = this.createStaticNormalDayEvents2();
         //  let eventSource2 = this.createStaticNormalDayEvents3();
@@ -59,8 +61,7 @@ export class EventosPage {
     }
 
     onViewTitleChanged = (title: string) => {
-        console.log(title);
-        this.viewTitle = title;
+        this.viewTitle = title[0].toUpperCase().concat(title.slice(1));
     }
 
     onEventSelected(event) {
